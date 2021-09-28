@@ -1,0 +1,27 @@
+#buslogo {
+    width: 65px;
+    height: auto;
+}
+
+#products {
+    display:grid;
+    grid-template-columns: 200px;
+    grid-template-rows: 400px;
+}
+
+
+#img1 {
+    grid-column-start: 1;
+    width: 100%
+    
+}
+
+#img2 {
+    grid-column-start: 2;
+    width: 100%
+}
+
+#img3 {
+    grid-column-start: 3;
+    width: 100%
+}
