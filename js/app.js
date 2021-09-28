@@ -1,14 +1,18 @@
 'use strict';
 
-const allimages = [];
+
+Image.allProducts = [];
+Image.totalClicks = 0;
+Image.lastShown = [];
 
 function Image (name, url) {
     this.name = name;
     this.url = `assets/img/${url}`;
     this.clicks = 0;
     this.timesShown = 0;
-    allimages.push(this);
+    Image.allProducts.push(this);
 }
+
 
 
 let productsEl = document.getElementById('products');
@@ -19,53 +23,66 @@ let image3El = document.getElementById('img3');
 
 function renderproduct () {
 
-    let firstproductindex = Math.floor(Math.random() * allimages.length);
-    let secondproductindex = Math.floor(Math.random() * allimages.length);
-    let thirdproductindex = Math.floor(Math.random() * allimages.length);
+    let firstproductindex = Math.floor(Math.random() * Image.allProducts.length);
+    let secondproductindex = Math.floor(Math.random() * Image.allProducts.length);
+    let thirdproductindex = Math.floor(Math.random() * Image.allProducts.length);
 
-        while (firstproductindex === secondproductindex) {
-            secondproductindex = Math.floor(Math.random() * allimages.length); 
-        } while (secondproductindex === thirdproductindex) {
-            thirdproductindex = Math.floor(Math.random() * allimages.length);
-        }
+    while (firstproductindex === secondproductindex || firstproductindex === thirdproductindex || secondproductindex === thirdproductindex || Image.lastShown.includes(firstproductindex) || Image.lastShown.includes(secondproductindex) || Image.lastShown.includes(thirdproductindex)) {
+        firstproductindex = Math.floor(Math.random() * Image.allProducts.length);
+        secondproductindex = Math.floor(Math.random() * Image.allProducts.length);
+        thirdproductindex = Math.floor(Math.random() * Image.allProducts.length);
+    }
 
-        let first =allimages[firstproductindex];
-        let second = allimages[secondproductindex];
-        let third = allimages[thirdproductindex];
+    image1El.src = Image.allProducts[firstproductindex].url;
+    image1El.alt = Image.allProducts[firstproductindex].name;
 
-        image1El.src = first.url;
-        image1El.name = first.name;
-        first.timesShown ++;
+    image2El.src = Image.allProducts[secondproductindex].url;
+    image2El.alt = Image.allProducts[secondproductindex].name;
 
-        image2El.src = second.url;
-        image2El.name = second.name;
-        second.timesShown ++;
+    image3El.src = Image.allProducts[thirdproductindex].url;
+    image3El.alt = Image.allProducts[thirdproductindex].name;
 
-        image3El.src = third.url;
-        image3El.name = third.name;
-        third.timesShown ++;
+    Image.allProducts[firstproductindex].timesShown ++;
+    Image.allProducts[secondproductindex].timesShown ++;
+    Image.allProducts[thirdproductindex].timesShown ++;
 
-image1El.src = allimages[firstproductindex].url;
-image2El.src = allimages[secondproductindex].url;
-image3El.src = allimages[thirdproductindex].url;
+    Image.lastShown[0] = firstproductindex;
+    Image.lastShown[1] = secondproductindex;
+    Image.lastShown[2] = thirdproductindex;
 
 }
 
 function handleVote (event) {
-    event.preventDefault();
+   for (var i in Image.allProducts) {
+       if (event.target.alt === Image.allProducts[i].name){
+           Image.allProducts[i].clicks ++;
 
-    let producteElement = event.target;
-    console.log(producteElement);
+           Image.totalClicks ++;
+       }
+   }
+        if (Image.totalClicks < 25) {
+                renderproduct();
+            } else {
+            productsEl.removeEventListener('click', handleVote);
+            document.getElementById('products').innerHTML = "";
 
-    for (let i = 0; i <allimages.length; i++) {
-        if (producteElement.name === allimages[i].name) {
-            allimages[i].clicks++;
-            console.log(allimages[i]);
-        }
-    }   
-    renderproduct();
-        }
+            let buttonEl = document.createElement('button');
+            buttonEl.innerText = "Click For Results";
+            buttonEl.id = "button-id";
+            document.getElementById('results').appendChild(buttonEl);
+            document.getElementById("button-id").addEventListener('click', showResults);
+        } 
+}
 
+function showResults () {
+    document.getElementById('resultlist').innerText ='';
+
+    for (let i = 0; i < Image.allProducts.length; i++) {
+        let listEl = document.createElement('li');
+        listEl.innerText = `${Image.allProducts[i].name} had ${Image.allProducts[i].clicks} votes, and was seen ${Image.allProducts[i].timesShown} times.`;
+        document.getElementById('resultlist').appendChild(listEl);
+    }
+}
 
 image1El.addEventListener('click', handleVote);
 image2El.addEventListener('click', handleVote);
