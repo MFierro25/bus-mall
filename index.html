@@ -7,8 +7,8 @@
   <title>Buss-Mall</title>
   <link rel="stylesheet" href="css/style.css" type="text/css">
   <link rel="stylesheet" href="css/reset.css" type="text/css">
-  
-</head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script></head>
+
 
 <body>
     <header>
@@ -16,6 +16,10 @@
             <img id="buslogo" src="assets/img/bus-img.png">
         </div>
         <h3>Buss Mall</h3>
+        <p>
+            Look the the items below and cast your vote on which product you prefer!
+        </p>
+        <hr>
     </header>
 
     <main>
@@ -30,24 +34,20 @@
             
 
         </div>
-        <div>
-            <p>
-                Results Will be Shown below after votes has been casted!
-
-            </p>
-        </div>
+      
         <div id="results">
-            <ul id="resultlist">
-
-            </ul>
+            <canvas id="mychart" width= 500>
+              
+            </canvas>
         </div>
     </main>
 
     <footer>
 
     </footer>
+<script src="js/app.js"></script>
 
-    <script src="js/app.js"></script>
+
 </body>
 
 </html>

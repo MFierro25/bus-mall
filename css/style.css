@@ -1,31 +1,79 @@
+
+main {
+}
+
 #buslogo {
     width: 65px;
     height: auto;
+    float: left;
 }
 
+h3 {
+    float: center;
+    font-size: 50px;
+    font-family: arial;
+
+}
+
+header {
+    display: inline;
+}
 #products {
     display:grid;
-    width: 600px;
-    grid-template-columns: 200px;
+    width: 750px;
+    grid-template-columns: 250px;
     grid-template-rows: 300px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
 
 }
 
+#info {
+    text-align: center;
+}
 
 #img1 {
     grid-column-start: 1;
-    width: 100%
+    width: 90%
+    
     
 }
 
 #img2 {
     grid-column-start: 2;
     width: 100%
+   
 }
 
 #img3 {
     grid-column-start: 3;
     width: 100%
+    
+}
+
+#button-id {
+    box-shadow: 7px 5px 0px 0px #42053b;
+	background:linear-gradient(to bottom, #9a77ec 5%, #f0c3e7 100%);
+	background-color:#9a77ec;
+	border-radius:21px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:22px;
+	font-style:italic;
+	padding:5px 70px;
+	text-decoration:none;
+    }
+    #button-id:hover {
+        background:linear-gradient(to bottom, #f0c3e7 5%, #fa0aae 100%);
+	background-color:#f0c3e7;
+    }
+    #button-id:active {
+        position:relative;
+        top:1px;
+    }
+    
 }

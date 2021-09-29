@@ -75,14 +75,44 @@ function handleVote (event) {
 }
 
 function showResults () {
-    document.getElementById('resultlist').innerText ='';
 
-    for (let i = 0; i < Image.allProducts.length; i++) {
-        let listEl = document.createElement('li');
-        listEl.innerText = `${Image.allProducts[i].name} had ${Image.allProducts[i].clicks} votes, and was seen ${Image.allProducts[i].timesShown} times.`;
-        document.getElementById('resultlist').appendChild(listEl);
+        const ctx = document.getElementById('mychart').getContext('2d');
+                    const votes = [];
+                    const names = [];
+                    const colors = ['rgba(27, 153, 139, 0.9)', 'rgba(243, 222, 138, 0.9)', 'rgba(198, 65, 145 0.9)',
+                'rgba(0, 103, 163, 0.9)','rgba(186, 191, 209, 0.9)'];
+                        for( i = 0; i <Image.allProducts.length; i++) {
+                            votes[i] = Image.allProducts[i].clicks;
+                            names[i] = Image.allProducts[i].name;
+                            for(var i = 0; i <Image.allProducts.length; i++) {
+                                votes[i] = Image.allProducts[i].clicks;
+                                names[i] = Image.allProducts[i].name;
+                            }
+                    
+                    const myChart = new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                            labels: names,
+                            datasets: [{
+                                label: '# of Votes Each Product Recieved',
+                                data: votes,
+                                backgroundColor: colors,
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                      });
+    
+                        }
+    
     }
-}
+
 
 image1El.addEventListener('click', handleVote);
 image2El.addEventListener('click', handleVote);
@@ -110,4 +140,6 @@ new Image ('wine-glass', 'wine-glass.jpg');
 
 renderproduct();
 
-console.log(allimages);
+
+
+
