@@ -1,6 +1,5 @@
 'use strict';
 
-
 Image.allProducts = [];
 Image.totalClicks = 0;
 Image.lastShown = [];
@@ -12,7 +11,6 @@ function Image (name, url) {
     this.timesShown = 0;
     Image.allProducts.push(this);
 }
-
 
 
 let productsEl = document.getElementById('products');
@@ -71,6 +69,8 @@ function handleVote (event) {
             buttonEl.id = "button-id";
             document.getElementById('results').appendChild(buttonEl);
             document.getElementById("button-id").addEventListener('click', showResults);
+
+            localStorage.setItem('setProducts', JSON.stringify(Image.allProducts));
         } 
 }
 
@@ -113,6 +113,22 @@ function showResults () {
     
     }
 
+    function readData () {
+        const jsonData = localStorage.getItem('mychart');
+
+        let parsedData = JSON.parse(jsonData);
+
+        return parsedData;
+    }
+
+    function saveData (data) {
+        console.log(Image.allProducts[i], data);
+        Image.allProducts[i].push(data);
+
+        let stringifiedData = JSON.stringify(Image.allProducts[i]);
+
+        localStorage.setItem('mychart', stringifiedData);
+    }
 
 image1El.addEventListener('click', handleVote);
 image2El.addEventListener('click', handleVote);
@@ -137,6 +153,8 @@ new Image ('tauntaun', 'tauntaun.jpg');
 new Image ('unicorn', 'unicorn.jpg');
 new Image ('water-can', 'water-can.jpg');
 new Image ('wine-glass', 'wine-glass.jpg');
+
+
 
 renderproduct();
 
