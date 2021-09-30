@@ -3,14 +3,14 @@ main {
 }
 
 #buslogo {
-    width: 65px;
+    width: 80px;
     height: auto;
     float: left;
 }
 
 h3 {
     float: center;
-    font-size: 50px;
+    font-size: 80px;
     font-family: arial;
 
 }
@@ -20,8 +20,8 @@ header {
 }
 #products {
     display:grid;
-    width: 750px;
-    grid-template-columns: 250px;
+    width: 900px;
+    grid-template-columns: 300px;
     grid-template-rows: 300px;
     margin-left: auto;
     margin-right: auto;
